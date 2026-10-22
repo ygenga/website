@@ -117,27 +117,45 @@ h1 { font-size: clamp(52px, 8vw, 104px); line-height: 0.98; letter-spacing: -0.0
   .four h3 { font-size: 23px; }
 }
 
-/* 吃了吗 */
-.app { background: var(--navy); color: var(--navy-ink); padding-block: 104px; overflow: hidden; }
-.app .kicker { color: #8fb0ff; }
-.app-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 64px; align-items: start; }
-.app-name { font-size: clamp(64px, 8.4vw, 108px); line-height: 1.1; font-weight: 700; color: #ffffff; white-space: nowrap; }
-.q { color: var(--red); }
-.app h2 { color: #fff; max-width: none; }
-.app-lede { font-size: 22px; line-height: 1.4; margin-top: 18px; color: #fff; max-width: 40ch; }
-.facts { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
-.facts li { padding-left: 20px; position: relative; color: var(--navy-soft); }
-.facts li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 2px; background: #8fb0ff; }
-.facts strong { color: #fff; font-weight: 600; }
-.app-status { margin-top: 24px; color: var(--navy-ink); border-left: 2px solid var(--red); padding-left: 14px; }
-.app .btn { background: #fff; color: #0f1b2d; }
-.app .btn:hover { background: #8fb0ff; color: #0f1b2d; }
-.app .textlink { color: #8fb0ff; }
-.app a:focus-visible { outline-color: #8fb0ff; }
+/* 吃了吗: borrows the app's own system (rice paper, ink, cinnabar, Noto Serif SC) */
+@font-face { font-family: "Noto Serif SC App"; src: url("fonts/noto-serif-sc-700-subset.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "DM Sans"; src: url("fonts/dm-sans-latin-wght-normal.woff2") format("woff2"); font-weight: 100 1000; font-display: swap; }
+.app {
+  --paper: #F8F5EF; --ink: #2B2724; --ink-soft: #6A635A; --border: #E4DDD1; --cinnabar: #C2402F; --cinnabar-deep: #9A3324;
+  --cn: "Noto Serif SC App", "Songti SC", "Noto Serif CJK SC", serif; --app-body: "DM Sans", system-ui, sans-serif;
+  position: relative; overflow: hidden; background: var(--paper); color: var(--ink); font-family: var(--app-body);
+  border-top: 1px solid var(--border); padding-block: 104px; color-scheme: light;
+}
+.app-watermark { position: absolute; right: -6%; top: -4%; font: 700 clamp(420px, 60vw, 820px)/1 var(--cn); color: #EFEAE1; pointer-events: none; user-select: none; }
+.app-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; align-items: center; }
+.app-brand { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cinnabar); }
+.app-brand img { width: 48px; height: 48px; border-radius: 12px; box-shadow: 0 1px 2px rgba(43,39,36,.12); }
+.app-name { font: 700 clamp(72px, 9vw, 120px)/1 var(--cn); color: var(--ink); margin-top: 28px; letter-spacing: 0.01em; }
+.app-name .q, .q { color: var(--cinnabar); }
+.pinyin { font: 700 clamp(24px, 2.6vw, 32px)/1 var(--cn); color: var(--cinnabar); letter-spacing: 0.06em; margin-top: 10px; }
+.app h2 { font-family: var(--cn); font-weight: 700; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; letter-spacing: -0.01em; color: var(--ink); margin-top: 36px; max-width: 20ch; }
+.app h2 .hl { color: var(--cinnabar); }
+.app-lede { font-size: 20px; color: var(--ink-soft); margin-top: 14px; max-width: 44ch; }
+.facts { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 18px; }
+.facts li { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; }
+.facts .num { width: 48px; height: 48px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font: 700 20px/1 var(--cn); color: var(--ink); }
+.facts strong { display: block; font-size: 19px; font-weight: 700; color: var(--ink); }
+.facts span:not(.num) { display: block; color: var(--ink-soft); font-size: 16px; line-height: 1.5; margin-top: 2px; }
+.app-status { margin-top: 28px; padding: 14px 18px; background: #fff; border: 1px solid var(--border); border-left: 3px solid var(--cinnabar); border-radius: 8px; color: var(--ink); font-size: 16px; max-width: 52ch; }
+.app .btn-red { background: var(--cinnabar); color: #fff; }
+.app .btn-red:hover { background: var(--cinnabar-deep); color: #fff; }
+.app .textlink { color: var(--cinnabar-deep); }
+.app a:focus-visible { outline-color: var(--cinnabar); }
+.app-visual { position: relative; margin: 0; }
+.app-visual img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 22px; border: 1px solid var(--border); box-shadow: 0 30px 60px -30px rgba(43,39,36,.45); }
+.seal { position: absolute; top: -22px; right: -18px; width: 104px; height: 104px; display: grid; place-items: center; background: var(--cinnabar); color: #F8F5EF; border-radius: 10px; font: 700 40px/1.02 var(--cn); writing-mode: vertical-rl; letter-spacing: 0.04em; transform: rotate(6deg); box-shadow: 0 0 0 4px var(--paper); }
+.app-visual figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-soft); }
+.app-visual figcaption span { font-family: var(--cn); font-weight: 700; color: var(--ink); margin-right: 6px; }
 @media (max-width: 860px) {
   .app { padding-block: 64px; }
-  .app-grid { grid-template-columns: 1fr; gap: 24px; }
-  .app-name { font-size: clamp(64px, 21vw, 120px); }
+  .app-grid { grid-template-columns: 1fr; gap: 48px; }
+  .app-visual { max-width: 420px; margin-right: 18px; }
+  .seal { width: 84px; height: 84px; font-size: 32px; right: -14px; }
 }
 
 /* Path */
