@@ -138,7 +138,7 @@
           <p class="proof-label">Proof</p>
           <ul class="proof">
             <li>Founded GZ Trading GmbH and wrote its go-to-market for a B2B wholesale launch: pricing, positioning, customers</li>
-            <li>Negotiated supplier contracts that cut procurement costs by about 5%</li>
+            <li>Negotiated the supplier contracts and won the first B2B clients through direct outreach</li>
             <li>Designed, coded and shipped <span lang="zh">吃了吗</span> alone; it's now in closed testing on Google Play</li>
           </ul>
         </li>
@@ -271,68 +271,87 @@
     </div>
   </section>
 
-  <!-- Timeline: year ticker -->
-  <section id="timeline" class="ticker" aria-labelledby="timeline-title">
-    <div class="ticker-pin">
-      <div class="wrap">
-        <div class="ticker-head">
-          <p class="kicker"><span class="idx">04</span>Timeline</p>
-          <h2 id="timeline-title" class="ticker-title">Twelve years, one step at a time.</h2>
-        </div>
-        <div class="ticker-main">
-          <div class="ticker-year" aria-hidden="true"><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span></div>
-          <ol class="ticker-steps">
-          <li class="ticker-step" data-year="2014">
-            <p class="ts-year">2014</p>
-            <h3>China Restaurant Peking</h3>
-            <p class="ts-role">Restaurant &amp; bar manager, Gaweinstal</p>
-            <p class="ts-proof">Led a team of 6 and redesigned workflows: waiting time down 20%, customer satisfaction up 30%.</p>
+  <!-- Timeline: a line that draws itself as you scroll -->
+  <section id="timeline" class="lt-section" aria-labelledby="timeline-title">
+    <div class="wrap">
+      <p class="kicker"><span class="idx">04</span>Timeline</p>
+      <h2 id="timeline-title" class="reveal-lines">Twelve years, step by step.</h2>
+      <div class="lt">
+        <span class="lt-track" aria-hidden="true"><span class="lt-fill"></span></span>
+        <ol class="lt-list">
+          <li class="lt-item lt-item--l">
+            <p class="lt-year">2014</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>China Restaurant Peking</h3>
+              <p class="lt-role">Restaurant &amp; bar manager, Gaweinstal</p>
+              <p class="lt-proof">Led a team of 6 and redesigned workflows: waiting time down 20%, customer satisfaction up 30%.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2017">
-            <p class="ts-year">2017</p>
-            <h3>Louis Vuitton</h3>
-            <p class="ts-role">Client advisor, Vienna</p>
-            <p class="ts-proof">Top 10% of national sales, targets beaten by 8–15%, client retention up 18%.</p>
+          <li class="lt-item lt-item--r">
+            <p class="lt-year">2017</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>Louis Vuitton</h3>
+              <p class="lt-role">Client advisor, Vienna</p>
+              <p class="lt-proof">Top 10% of national sales, targets beaten by 8–15%, client retention up 18%.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2021">
-            <p class="ts-year">2021</p>
-            <h3>GZ Trading GmbH</h3>
-            <p class="ts-role">Founder &amp; CEO, Vienna</p>
-            <p class="ts-proof">Launched a B2B wholesale business from scratch and cut procurement costs by about 5%. Started my bachelor's the same year.</p>
+          <li class="lt-item lt-item--l">
+            <p class="lt-year">2021</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>GZ Trading GmbH</h3>
+              <p class="lt-role">Founder &amp; CEO, Vienna</p>
+              <p class="lt-proof">Launched a B2B wholesale business from scratch: suppliers, pricing and the first clients. Started my bachelor's the same year.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2023">
-            <p class="ts-year">2023</p>
-            <h3>Korea University</h3>
-            <p class="ts-role">Exchange semester, Seoul</p>
-            <p class="ts-proof">GPA 4.0 out of 4.5 at one of Korea's top business schools.</p>
+          <li class="lt-item lt-item--r">
+            <p class="lt-year">2023</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>Korea University</h3>
+              <p class="lt-role">Exchange semester, Seoul</p>
+              <p class="lt-proof">GPA 4.0 out of 4.5.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2023">
-            <p class="ts-year">2023</p>
-            <h3>KPMG Austria</h3>
-            <p class="ts-role">Risk consultant, Financial Services Advisory</p>
-            <p class="ts-proof">Risk management consulting for banks and other financial institutions. Onboarded 8 new colleagues, about 30% faster delivery.</p>
+          <li class="lt-item lt-item--l">
+            <p class="lt-year">2023</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>KPMG Austria</h3>
+              <p class="lt-role">Risk consultant, Financial Services Advisory</p>
+              <p class="lt-proof">Risk management consulting for banks and other financial institutions. Onboarded 8 new colleagues, about 30% faster delivery.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2025">
-            <p class="ts-year">2025</p>
-            <h3>Católica Lisbon</h3>
-            <p class="ts-role">Master's in strategy &amp; consulting</p>
-            <p class="ts-proof">TOP+ merit scholarship. President of the Católica Cases Society.</p>
+          <li class="lt-item lt-item--r">
+            <p class="lt-year">2025</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>Católica Lisbon</h3>
+              <p class="lt-role">Master's in strategy &amp; consulting</p>
+              <p class="lt-proof">TOP+ merit scholarship. President of the Católica Cases Society.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2026">
-            <p class="ts-year">2026</p>
-            <h3><span lang="zh">吃了吗</span> Chi Le Ma</h3>
-            <p class="ts-role">Founder, designer &amp; developer</p>
-            <p class="ts-proof">Built alone this year, from the first line of code to the Play Store listing. Now in closed testing.</p>
+          <li class="lt-item lt-item--l">
+            <p class="lt-year">2026</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3><span lang="zh">吃了吗</span> Chi Le Ma</h3>
+              <p class="lt-role">Founder, designer &amp; developer</p>
+              <p class="lt-proof">Built alone this year, from the first line of code to the Play Store listing. Now in closed testing.</p>
+            </div>
           </li>
-          <li class="ticker-step" data-year="2026">
-            <p class="ts-year">2026</p>
-            <h3>Queen's University</h3>
-            <p class="ts-role">Exchange at Smith School of Business, Kingston</p>
-            <p class="ts-proof">Director of Operations for the Smith AI x Business Summit 2026 in Toronto.</p>
+          <li class="lt-item lt-item--r">
+            <p class="lt-year">2026</p>
+            <span class="lt-dot" aria-hidden="true"></span>
+            <div class="lt-card">
+              <h3>Queen's University</h3>
+              <p class="lt-role">Exchange at Smith School of Business, Kingston</p>
+              <p class="lt-proof">Director of Operations for the Smith AI x Business Summit 2026 in Toronto.</p>
+            </div>
           </li>
-          </ol>
-        </div>
-        <div class="ticker-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </ol>
       </div>
     </div>
   </section>

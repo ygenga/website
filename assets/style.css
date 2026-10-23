@@ -301,40 +301,38 @@ p { text-wrap: pretty; }
 .mini-bar.is-ref { background: #c3cad6; }
 .mini-span { position: absolute; top: 0; bottom: 0; left: var(--from); right: 0; background: repeating-linear-gradient(135deg, rgba(255,255,255,.55) 0 2px, transparent 2px 5px); border-radius: 0 4px 4px 0; }
 
-/* Timeline: year ticker. Without motion it is a plain list; with motion it pins and steps. */
-.ticker { padding-block: 16vh 8vh; }
-.ticker-title { font-size: clamp(28px, 3vw, 44px); letter-spacing: -0.03em; line-height: 1.05; max-width: 22ch; }
-.ticker-year { display: none; }
-.ticker-steps { list-style: none; padding: 0; margin: 48px 0 0; display: grid; gap: 40px; }
-.ticker-step { border-top: 1px solid var(--line); padding-top: 20px; max-width: 640px; }
-.ts-year { font-size: 15px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
-.ticker-step h3 { font-size: clamp(32px, 3.6vw, 56px); letter-spacing: -0.04em; line-height: 1.02; margin-top: 8px; }
-.ts-role { color: var(--ink-soft); font-size: 17px; margin-top: 8px; }
-.ts-proof { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.4; letter-spacing: -0.01em; margin-top: 18px; max-width: 34ch; }
-.ticker-dots { display: none; }
-
-.ticker.is-pinned { padding: 0; }
-.ticker.is-pinned .ticker-pin { height: 100vh; height: 100svh; display: flex; align-items: center; }
-.ticker.is-pinned .ticker-pin > .wrap { display: grid; grid-template-rows: auto 1fr auto; height: 100%; padding-block: 96px 40px; }
-.ticker.is-pinned .ticker-main { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 56px; align-items: center; }
-.ticker.is-pinned .ticker-year { display: flex; font-size: clamp(120px, 21vw, 330px); font-weight: 800; letter-spacing: -0.03em; line-height: 0.82; color: var(--ink); margin-left: -0.04em; }
-.digit { display: block; height: 0.82em; overflow: hidden; flex: none; }
-.digit-col { display: flex; flex-direction: column; align-items: flex-start; }
-.digit-col span { display: block; height: 0.82em; line-height: 0.82; }
-.ticker.is-pinned .ticker-steps { position: relative; margin: 0; display: block; min-height: 300px; }
-.ticker.is-pinned .ticker-step { position: absolute; inset: 0 0 auto 0; border-top: 0; padding-top: 0; visibility: hidden; }
-.ticker.is-pinned .ts-year { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-.ticker.is-pinned .ticker-dots { display: flex; gap: 10px; align-items: center; }
-.ticker-dots span { width: 28px; height: 3px; border-radius: 2px; background: var(--line); transition: background 300ms var(--ease-out), width 400ms var(--ease-out); }
-.ticker-dots span.is-done { background: var(--ink-soft); }
-.ticker-dots span.is-active { background: var(--accent); width: 56px; }
+/* Timeline: vertical line that fills with scroll; milestones alternate sides on desktop */
+.lt-section { padding-block: 16vh 10vh; }
+.lt-section h2 { font-size: clamp(36px, 4.4vw, 64px); letter-spacing: -0.04em; line-height: 1.02; max-width: 16ch; }
+.lt { --gap: 72px; position: relative; margin-top: 72px; }
+.lt-track { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--line); border-radius: 2px; }
+.lt-fill { position: absolute; inset: 0; background: var(--accent); border-radius: 2px; transform-origin: top; }
+.lt-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 64px; }
+.lt-item { position: relative; display: grid; grid-template-columns: 1fr var(--gap) 1fr; align-items: start; }
+.lt-dot { grid-column: 2; justify-self: center; width: 16px; height: 16px; margin-top: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line); box-shadow: 0 0 0 4px var(--bg); transition: border-color 300ms var(--ease-out), background 300ms var(--ease-out), transform 400ms var(--ease-out); position: relative; z-index: 1; }
+.lt-item.is-on .lt-dot { border-color: var(--accent); background: var(--accent); transform: scale(1.15); }
+.lt-year { grid-row: 1; font-size: clamp(48px, 5.6vw, 88px); font-weight: 800; letter-spacing: -0.05em; line-height: 0.9; color: var(--line); font-variant-numeric: tabular-nums; transition: color 500ms var(--ease-out); }
+.lt-item.is-on .lt-year { color: var(--ink); }
+.lt-card { grid-row: 1; max-width: 460px; }
+.lt-card h3 { font-size: clamp(24px, 2.2vw, 32px); letter-spacing: -0.03em; line-height: 1.1; }
+.lt-role { color: var(--ink-soft); font-size: 15px; margin-top: 6px; }
+.lt-proof { font-size: 17px; line-height: 1.5; margin-top: 12px; }
+.lt-item--l .lt-year { grid-column: 1; text-align: right; }
+.lt-item--l .lt-card { grid-column: 3; }
+.lt-item--r .lt-year { grid-column: 3; }
+.lt-item--r .lt-card { grid-column: 1; justify-self: end; text-align: right; }
+html:not(.motion) .lt-dot { border-color: var(--accent); background: var(--accent); }
+html:not(.motion) .lt-year { color: var(--ink); }
 @media (max-width: 860px) {
-  .ticker.is-pinned .ticker-pin > .wrap { padding-block: 84px 28px; }
-  .ticker.is-pinned .ticker-main { grid-template-columns: 1fr; gap: 20px; align-content: center; }
-  .ticker.is-pinned .ticker-year { font-size: clamp(96px, 31vw, 180px); }
-  .ticker.is-pinned .ticker-steps { min-height: 280px; }
-  .ticker-dots span { width: 18px; }
-  .ticker-dots span.is-active { width: 36px; }
+  .lt { --gap: 0px; margin-top: 48px; padding-left: 36px; }
+  .lt-track { left: 7px; margin-left: 0; }
+  .lt-list { gap: 44px; }
+  .lt-item { grid-template-columns: 1fr; }
+  .lt-dot { position: absolute; grid-column: auto; left: -36px; top: 0; margin-top: 4px; }
+  .lt-item { display: block; }
+  .lt-card { margin-top: 10px; }
+  .lt-year, .lt-item--l .lt-year, .lt-item--r .lt-year { grid-column: 1; grid-row: 1; text-align: left; font-size: 40px; }
+  .lt-card, .lt-item--l .lt-card, .lt-item--r .lt-card { grid-column: 1; grid-row: 2; justify-self: start; text-align: left; margin-top: 10px; }
 }
 
 @media (max-width: 760px) { .mini-row { grid-template-columns: 88px 1fr 64px; } }

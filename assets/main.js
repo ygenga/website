@@ -280,45 +280,16 @@
       gsap.from(m.querySelectorAll(".mini-bar"), { scaleX: 0, duration: 1.1, ease: EASE, stagger: 0.15, scrollTrigger: { trigger: m, start: "top 85%", once: true } });
     });
 
-    // ---------- Timeline: pinned year ticker ----------
-    (function () {
-      var section = document.querySelector(".ticker");
-      if (!section) return;
-      var steps = gsap.utils.toArray(".ticker-step");
-      var cols = gsap.utils.toArray(".ticker .digit-col");
-      var dots = gsap.utils.toArray(".ticker-dots span");
-      var current = -1;
-      section.classList.add("is-pinned");
-      function setYear(year, instant) {
-        String(year).split("").forEach(function (d, i) {
-          var opts = { duration: instant ? 0 : 0.9, ease: "expo.out", delay: instant ? 0 : (3 - i) * 0.04, overwrite: true };
-          gsap.to(cols[i], Object.assign({ yPercent: -10 * +d }, opts));
-          // Each slot takes the width of the digit it shows, so a narrow "1" leaves no gap
-          gsap.to(cols[i].parentNode, Object.assign({ width: cols[i].children[+d].offsetWidth }, opts));
-        });
-      }
-      function show(i, dir) {
-        if (i === current) return;
-        var prev = steps[current];
-        if (prev) gsap.to(prev, { autoAlpha: 0, y: dir > 0 ? -40 : 40, duration: 0.45, ease: "power2.in", overwrite: true });
-        var next = steps[i];
-        gsap.fromTo(next, { autoAlpha: 0, y: dir > 0 ? 40 : -40 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: EASE, delay: prev ? 0.2 : 0, overwrite: true });
-        gsap.fromTo(next.children, { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: EASE, stagger: 0.06, delay: prev ? 0.25 : 0.05, overwrite: true });
-        setYear(next.dataset.year, current === -1);
-        dots.forEach(function (d, k) { d.classList.toggle("is-active", k === i); d.classList.toggle("is-done", k < i); });
-        current = i;
-      }
-      show(0, 1);
-      ScrollTrigger.create({
-        trigger: section, start: "top top",
-        end: function () { return "+=" + window.innerHeight * 0.75 * steps.length; },
-        pin: true, anticipatePin: 1, invalidateOnRefresh: true,
-        onUpdate: function (self) {
-          var i = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
-          show(i, self.direction);
-        }
+    // ---------- Timeline: the line fills with scroll, milestones light up as it reaches them ----------
+    gsap.fromTo(".lt-fill", { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: ".lt", start: "top 60%", end: "bottom 60%", scrub: 0.4 } });
+    gsap.utils.toArray(".lt-item").forEach(function (item) {
+      var left = item.classList.contains("lt-item--l");
+      ScrollTrigger.create({ trigger: item, start: "top 60%", onEnter: function () { item.classList.add("is-on"); }, onLeaveBack: function () { item.classList.remove("is-on"); } });
+      mm.add({ wide: "(min-width: 861px)", narrow: "(max-width: 860px)" }, function (ctx) {
+        var dx = ctx.conditions.wide ? (left ? 40 : -40) : 24;
+        gsap.from(item.querySelector(".lt-card"), { x: dx, autoAlpha: 0, duration: 1, ease: EASE, scrollTrigger: { trigger: item, start: "top 72%", once: true } });
       });
-    })();
+    });
 
     // ---------- Rows draw in ----------
     gsap.utils.toArray(".rows").forEach(function (list) {
