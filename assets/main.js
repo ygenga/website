@@ -19,6 +19,33 @@
     if (s) b.dataset.label = s.textContent;
   });
 
+  // Timeline: gridline length and hover/focus tooltip (works with or without motion)
+  var tlChart = document.querySelector(".tl-chart");
+  if (tlChart) {
+    var tlRows = tlChart.querySelector(".tl-rows");
+    var tlTip = tlChart.querySelector(".tl-tip");
+    var setGrid = function () { tlChart.style.setProperty("--grid-h", tlRows.offsetHeight + 14 + "px"); };
+    setGrid(); window.addEventListener("resize", setGrid);
+    var showTip = function (bar) {
+      var row = bar.closest(".tl-row");
+      var name = row.querySelector(".tl-label strong").textContent;
+      tlTip.innerHTML = "";
+      var strong = document.createElement("strong"); strong.textContent = name;
+      tlTip.appendChild(strong); tlTip.appendChild(document.createTextNode(bar.dataset.tip));
+      var c = tlChart.getBoundingClientRect(), r = bar.getBoundingClientRect();
+      var x = Math.min(Math.max(r.left + r.width / 2 - c.left, 120), c.width - 120);
+      tlTip.style.left = x + "px"; tlTip.style.top = r.top - c.top + "px";
+      tlTip.classList.add("is-on");
+    };
+    var hideTip = function () { tlTip.classList.remove("is-on"); };
+    tlChart.querySelectorAll(".tl-bar").forEach(function (bar) {
+      bar.addEventListener("pointerenter", function () { showTip(bar); });
+      bar.addEventListener("pointerleave", hideTip);
+      bar.addEventListener("focus", function () { showTip(bar); });
+      bar.addEventListener("blur", hideTip);
+    });
+  }
+
   var motion = root.classList.contains("motion");
   if (!motion || !window.gsap || !window.ScrollTrigger || !window.SplitText) {
     root.classList.remove("motion", "intro");
@@ -273,6 +300,14 @@
     gsap.fromTo(".path", { clipPath: "inset(0% 3% 0% 3% round 48px 48px 0px 0px)" }, {
       clipPath: "inset(0% 0% 0% 0% round 0px 0px 0px 0px)", ease: "none",
       scrollTrigger: { trigger: ".path", start: "top bottom", end: "top top", scrub: true }
+    });
+
+    // ---------- Timeline bars and mini charts grow from their baseline ----------
+    gsap.from(".tl-bar", { scaleX: 0, duration: 1.2, ease: EASE, stagger: 0.09, scrollTrigger: { trigger: ".tl-chart", start: "top 75%", once: true } });
+    gsap.from(".tl-now", { autoAlpha: 0, y: -12, duration: 0.8, ease: EASE, delay: 0.9, scrollTrigger: { trigger: ".tl-chart", start: "top 75%", once: true } });
+    gsap.from(".tl-row", { autoAlpha: 0, y: 14, duration: 0.8, ease: EASE, stagger: 0.05, scrollTrigger: { trigger: ".tl-chart", start: "top 80%", once: true } });
+    gsap.utils.toArray(".mini").forEach(function (m) {
+      gsap.from(m.querySelectorAll(".mini-bar"), { scaleX: 0, duration: 1.1, ease: EASE, stagger: 0.15, scrollTrigger: { trigger: m, start: "top 85%", once: true } });
     });
 
     // ---------- Rows draw in ----------
