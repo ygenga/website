@@ -72,6 +72,28 @@
   }, 2200);
 
   var mm = gsap.matchMedia();
+  var globeProgress = 0;
+
+  // ---------- 3D globe: load the React Three Fiber bundle only when the Path section is near ----------
+  function webgl() {
+    try { var c = document.createElement("canvas"); return !!(c.getContext("webgl2") || c.getContext("webgl")); } catch (e) { return false; }
+  }
+  var globeEl = document.querySelector(".path-globe");
+  if (globeEl && webgl() && "IntersectionObserver" in window) {
+    var gio = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      gio.disconnect();
+      var sc = document.createElement("script");
+      sc.src = "assets/globe/globe.js";
+      sc.onload = function () {
+        if (!window.mountGlobe) return;
+        window.mountGlobe(globeEl, function () { return globeProgress; }, false);
+        setTimeout(function () { globeEl.classList.add("is-ready"); }, 300);
+      };
+      document.body.appendChild(sc);
+    }, { rootMargin: "1200px 0px" });
+    gio.observe(globeEl);
+  }
 
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(init);
 
@@ -175,13 +197,13 @@
           trigger: item, start: "top 55%", end: "bottom 55%",
           onToggle: function (self) {
             gsap.to(item, { opacity: self.isActive ? 1 : 0.22, duration: 0.5, ease: "power2.out" });
-            if (self.isActive) gsap.to(roll, { yPercent: -25 * i, duration: 0.8, ease: EASE });
+            if (self.isActive) gsap.to(roll, { yPercent: -100 / items.length * i, duration: 0.8, ease: EASE });
           }
         });
       });
     });
     gsap.utils.toArray(".four-item").forEach(function (item) {
-      gsap.from(item.querySelectorAll("h3, p"), { y: 28, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.07, scrollTrigger: { trigger: item, start: "top 75%", once: true } });
+      gsap.from(item.querySelectorAll("h3, p, .proof li"), { y: 28, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.07, scrollTrigger: { trigger: item, start: "top 75%", once: true } });
     });
     document.querySelectorAll("[data-count]").forEach(function (el) {
       var o = { v: 0 }, n = +el.dataset.count, pre = el.dataset.prefix || "", suf = el.dataset.suffix || "";
@@ -216,7 +238,7 @@
         scrollTrigger: {
           trigger: section, start: "top top", end: function () { return "+=" + dist(); },
           pin: true, scrub: 1, invalidateOnRefresh: true, anticipatePin: 1,
-          onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
+          onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); globeProgress = self.progress; }
         }
       });
       gsap.utils.toArray(".city").forEach(function (city) {
@@ -232,6 +254,7 @@
       return function () { section.classList.remove("is-horizontal"); };
     });
     mm.add("(max-width: 860px)", function () {
+      ScrollTrigger.create({ trigger: ".path-track", start: "top 60%", end: "bottom 60%", onUpdate: function (self) { globeProgress = self.progress; } });
       gsap.utils.toArray(".city").forEach(function (city) {
         gsap.from(city.children, { y: 28, autoAlpha: 0, duration: 1, ease: EASE, stagger: 0.06, scrollTrigger: { trigger: city, start: "top 82%", once: true } });
       });
