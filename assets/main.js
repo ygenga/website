@@ -19,33 +19,6 @@
     if (s) b.dataset.label = s.textContent;
   });
 
-  // Timeline: gridline length and hover/focus tooltip (works with or without motion)
-  var tlChart = document.querySelector(".tl-chart");
-  if (tlChart) {
-    var tlRows = tlChart.querySelector(".tl-rows");
-    var tlTip = tlChart.querySelector(".tl-tip");
-    var setGrid = function () { tlChart.style.setProperty("--grid-h", tlRows.offsetHeight + 14 + "px"); };
-    setGrid(); window.addEventListener("resize", setGrid);
-    var showTip = function (bar) {
-      var row = bar.closest(".tl-row");
-      var name = row.querySelector(".tl-label strong").textContent;
-      tlTip.innerHTML = "";
-      var strong = document.createElement("strong"); strong.textContent = name;
-      tlTip.appendChild(strong); tlTip.appendChild(document.createTextNode(bar.dataset.tip));
-      var c = tlChart.getBoundingClientRect(), r = bar.getBoundingClientRect();
-      var x = Math.min(Math.max(r.left + r.width / 2 - c.left, 120), c.width - 120);
-      tlTip.style.left = x + "px"; tlTip.style.top = r.top - c.top + "px";
-      tlTip.classList.add("is-on");
-    };
-    var hideTip = function () { tlTip.classList.remove("is-on"); };
-    tlChart.querySelectorAll(".tl-bar").forEach(function (bar) {
-      bar.addEventListener("pointerenter", function () { showTip(bar); });
-      bar.addEventListener("pointerleave", hideTip);
-      bar.addEventListener("focus", function () { showTip(bar); });
-      bar.addEventListener("blur", hideTip);
-    });
-  }
-
   var motion = root.classList.contains("motion");
   if (!motion || !window.gsap || !window.ScrollTrigger || !window.SplitText) {
     root.classList.remove("motion", "intro");
@@ -302,13 +275,50 @@
       scrollTrigger: { trigger: ".path", start: "top bottom", end: "top top", scrub: true }
     });
 
-    // ---------- Timeline bars and mini charts grow from their baseline ----------
-    gsap.from(".tl-bar", { scaleX: 0, duration: 1.2, ease: EASE, stagger: 0.09, scrollTrigger: { trigger: ".tl-chart", start: "top 75%", once: true } });
-    gsap.from(".tl-now", { autoAlpha: 0, y: -12, duration: 0.8, ease: EASE, delay: 0.9, scrollTrigger: { trigger: ".tl-chart", start: "top 75%", once: true } });
-    gsap.from(".tl-row", { autoAlpha: 0, y: 14, duration: 0.8, ease: EASE, stagger: 0.05, scrollTrigger: { trigger: ".tl-chart", start: "top 80%", once: true } });
+    // ---------- Mini charts grow from their baseline ----------
     gsap.utils.toArray(".mini").forEach(function (m) {
       gsap.from(m.querySelectorAll(".mini-bar"), { scaleX: 0, duration: 1.1, ease: EASE, stagger: 0.15, scrollTrigger: { trigger: m, start: "top 85%", once: true } });
     });
+
+    // ---------- Timeline: pinned year ticker ----------
+    (function () {
+      var section = document.querySelector(".ticker");
+      if (!section) return;
+      var steps = gsap.utils.toArray(".ticker-step");
+      var cols = gsap.utils.toArray(".ticker .digit-col");
+      var dots = gsap.utils.toArray(".ticker-dots span");
+      var current = -1;
+      section.classList.add("is-pinned");
+      function setYear(year, instant) {
+        String(year).split("").forEach(function (d, i) {
+          var opts = { duration: instant ? 0 : 0.9, ease: "expo.out", delay: instant ? 0 : (3 - i) * 0.04, overwrite: true };
+          gsap.to(cols[i], Object.assign({ yPercent: -10 * +d }, opts));
+          // Each slot takes the width of the digit it shows, so a narrow "1" leaves no gap
+          gsap.to(cols[i].parentNode, Object.assign({ width: cols[i].children[+d].offsetWidth }, opts));
+        });
+      }
+      function show(i, dir) {
+        if (i === current) return;
+        var prev = steps[current];
+        if (prev) gsap.to(prev, { autoAlpha: 0, y: dir > 0 ? -40 : 40, duration: 0.45, ease: "power2.in", overwrite: true });
+        var next = steps[i];
+        gsap.fromTo(next, { autoAlpha: 0, y: dir > 0 ? 40 : -40 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: EASE, delay: prev ? 0.2 : 0, overwrite: true });
+        gsap.fromTo(next.children, { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: EASE, stagger: 0.06, delay: prev ? 0.25 : 0.05, overwrite: true });
+        setYear(next.dataset.year, current === -1);
+        dots.forEach(function (d, k) { d.classList.toggle("is-active", k === i); d.classList.toggle("is-done", k < i); });
+        current = i;
+      }
+      show(0, 1);
+      ScrollTrigger.create({
+        trigger: section, start: "top top",
+        end: function () { return "+=" + window.innerHeight * 0.75 * steps.length; },
+        pin: true, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          var i = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
+          show(i, self.direction);
+        }
+      });
+    })();
 
     // ---------- Rows draw in ----------
     gsap.utils.toArray(".rows").forEach(function (list) {

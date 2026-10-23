@@ -271,61 +271,68 @@
     </div>
   </section>
 
-  <!-- Timeline -->
-  <section id="timeline" class="timeline" aria-labelledby="timeline-title">
-    <div class="wrap">
-      <p class="kicker"><span class="idx">04</span>Timeline</p>
-      <h2 id="timeline-title" class="reveal-lines">Twelve years, side by side.</h2>
-      <p class="tl-intro reveal-up">Most of it overlapped: I managed a restaurant while selling at Louis Vuitton, and studied while working at KPMG.</p>
-      <ul class="tl-legend" aria-label="Legend">
-        <li data-kind="work">Work</li><li data-kind="venture">Venture</li><li data-kind="edu">Education</li>
-      </ul>
-      <div class="tl-chart">
-        <div class="tl-axis" aria-hidden="true"><span style="--x:0.0%">2014</span><span style="--x:7.41%" class="tl-tick--minor">2015</span><span style="--x:14.81%">2016</span><span style="--x:22.22%" class="tl-tick--minor">2017</span><span style="--x:29.63%">2018</span><span style="--x:37.04%" class="tl-tick--minor">2019</span><span style="--x:44.44%">2020</span><span style="--x:51.85%" class="tl-tick--minor">2021</span><span style="--x:59.26%">2022</span><span style="--x:66.67%" class="tl-tick--minor">2023</span><span style="--x:74.07%">2024</span><span style="--x:81.48%" class="tl-tick--minor">2025</span><span style="--x:88.89%">2026</span><span style="--x:96.3%" class="tl-tick--minor">2027</span></div>
-        <div class="tl-now" style="--xn:0.9489" aria-hidden="true"><span>Now</span></div>
-        <ol class="tl-rows">
-          <li class="tl-row" data-kind="work">
-            <p class="tl-label"><strong>China Restaurant Peking</strong><span>Restaurant & bar manager</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:3.7%;--e:66.67%" tabindex="0" aria-label="China Restaurant Peking: Restaurant & bar manager, 2014–2022. Led 6 staff, waiting time −20%." data-tip="2014–2022 · Led 6 staff, waiting time −20%"></span><span class="tl-dates">2014–2022</span></div>
+  <!-- Timeline: year ticker -->
+  <section id="timeline" class="ticker" aria-labelledby="timeline-title">
+    <div class="ticker-pin">
+      <div class="wrap">
+        <div class="ticker-head">
+          <p class="kicker"><span class="idx">04</span>Timeline</p>
+          <h2 id="timeline-title" class="ticker-title">Twelve years, one step at a time.</h2>
+        </div>
+        <div class="ticker-main">
+          <div class="ticker-year" aria-hidden="true"><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span><span class="digit"><span class="digit-col"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></span></span></div>
+          <ol class="ticker-steps">
+          <li class="ticker-step" data-year="2014">
+            <p class="ts-year">2014</p>
+            <h3>China Restaurant Peking</h3>
+            <p class="ts-role">Restaurant &amp; bar manager, Gaweinstal</p>
+            <p class="ts-proof">Led a team of 6 and redesigned workflows: waiting time down 20%, customer satisfaction up 30%.</p>
           </li>
-          <li class="tl-row" data-kind="work">
-            <p class="tl-label"><strong>Louis Vuitton</strong><span>Client advisor</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:26.67%;--e:57.78%" tabindex="0" aria-label="Louis Vuitton: Client advisor, 2017–2021. Top 10% of national sales." data-tip="2017–2021 · Top 10% of national sales"></span><span class="tl-dates">2017–2021</span></div>
+          <li class="ticker-step" data-year="2017">
+            <p class="ts-year">2017</p>
+            <h3>Louis Vuitton</h3>
+            <p class="ts-role">Client advisor, Vienna</p>
+            <p class="ts-proof">Top 10% of national sales, targets beaten by 8–15%, client retention up 18%.</p>
           </li>
-          <li class="tl-row" data-kind="venture">
-            <p class="tl-label"><strong>GZ Trading GmbH</strong><span>Founder & CEO</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:58.67%;--e:63.33%" tabindex="0" aria-label="GZ Trading GmbH: Founder & CEO, 2021–2022. B2B wholesale launch, team of 7." data-tip="2021–2022 · B2B wholesale launch, team of 7"></span><span class="tl-dates">2021–2022</span></div>
+          <li class="ticker-step" data-year="2021">
+            <p class="ts-year">2021</p>
+            <h3>GZ Trading GmbH</h3>
+            <p class="ts-role">Founder &amp; CEO, Vienna</p>
+            <p class="ts-proof">Launched a B2B wholesale business from scratch and cut procurement costs by about 5%. Started my bachelor's the same year.</p>
           </li>
-          <li class="tl-row" data-kind="edu">
-            <p class="tl-label"><strong>UAS BFI Vienna</strong><span>BA European Economy & Business</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:57.41%;--e:77.78%" tabindex="0" aria-label="UAS BFI Vienna: BA European Economy & Business, 2021–2024. Merit scholarship." data-tip="2021–2024 · Merit scholarship"></span><span class="tl-dates">2021–2024</span></div>
+          <li class="ticker-step" data-year="2023">
+            <p class="ts-year">2023</p>
+            <h3>Korea University</h3>
+            <p class="ts-role">Exchange semester, Seoul</p>
+            <p class="ts-proof">GPA 4.0 out of 4.5 at one of Korea's top business schools.</p>
           </li>
-          <li class="tl-row" data-kind="edu">
-            <p class="tl-label"><strong>Korea University</strong><span>Exchange semester</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:67.41%;--e:70.37%" tabindex="0" aria-label="Korea University: Exchange semester, 2023. GPA 4.0 / 4.5." data-tip="2023 · GPA 4.0 / 4.5"></span><span class="tl-dates">2023</span></div>
+          <li class="ticker-step" data-year="2023">
+            <p class="ts-year">2023</p>
+            <h3>KPMG Austria</h3>
+            <p class="ts-role">Risk consultant, Financial Services Advisory</p>
+            <p class="ts-proof">Risk management consulting for banks and other financial institutions. Onboarded 8 new colleagues, about 30% faster delivery.</p>
           </li>
-          <li class="tl-row" data-kind="work">
-            <p class="tl-label"><strong>KPMG Austria</strong><span>Risk consultant, Financial Services</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:71.63%;--e:86.37%" tabindex="0" aria-label="KPMG Austria: Risk consultant, Financial Services, 2023–2025. Onboarded 8 hires, ~30% faster delivery." data-tip="2023–2025 · Onboarded 8 hires, ~30% faster delivery"></span><span class="tl-dates">2023–2025</span></div>
+          <li class="ticker-step" data-year="2025">
+            <p class="ts-year">2025</p>
+            <h3>Católica Lisbon</h3>
+            <p class="ts-role">Master's in strategy &amp; consulting</p>
+            <p class="ts-proof">TOP+ merit scholarship. President of the Católica Cases Society.</p>
           </li>
-          <li class="tl-row" data-kind="edu">
-            <p class="tl-label"><strong>Católica Lisbon</strong><span>Master's in strategy & consulting</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:85.93%;--e:96.67%" tabindex="0" aria-label="Católica Lisbon: Master's in strategy & consulting, 2025–2027. TOP+ merit scholarship." data-tip="2025–2027 · TOP+ merit scholarship"></span><span class="tl-dates">2025–2027</span></div>
+          <li class="ticker-step" data-year="2026">
+            <p class="ts-year">2026</p>
+            <h3><span lang="zh">吃了吗</span> Chi Le Ma</h3>
+            <p class="ts-role">Founder, designer &amp; developer</p>
+            <p class="ts-proof">Built alone this year, from the first line of code to the Play Store listing. Now in closed testing.</p>
           </li>
-          <li class="tl-row" data-kind="venture">
-            <p class="tl-label"><strong><span lang="zh">吃了吗</span> Chi Le Ma</strong><span>Founder, designer & developer</span></p>
-            <div class="tl-lane"><span class="tl-bar is-ongoing" style="--s:86.67%;--e:100.0%" tabindex="0" aria-label="Chi Le Ma: Founder, designer & developer, 2025–now. In closed testing on Google Play." data-tip="2025–now · In closed testing on Google Play"></span><span class="tl-dates">2025–now</span></div>
+          <li class="ticker-step" data-year="2026">
+            <p class="ts-year">2026</p>
+            <h3>Queen's University</h3>
+            <p class="ts-role">Exchange at Smith School of Business, Kingston</p>
+            <p class="ts-proof">Director of Operations for the Smith AI x Business Summit 2026 in Toronto.</p>
           </li>
-          <li class="tl-row" data-kind="edu">
-            <p class="tl-label"><strong>Queen's University</strong><span>Exchange semester</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:93.85%;--e:96.07%" tabindex="0" aria-label="Queen's University: Exchange semester, 2026. Smith School of Business." data-tip="2026 · Smith School of Business"></span><span class="tl-dates">2026</span></div>
-          </li>
-          <li class="tl-row" data-kind="work">
-            <p class="tl-label"><strong>SAIBS 2026</strong><span>Director of Operations</span></p>
-            <div class="tl-lane"><span class="tl-bar" style="--s:94.22%;--e:94.96%" tabindex="0" aria-label="SAIBS 2026: Director of Operations, Oct 2026. AI summit in Toronto." data-tip="Oct 2026 · AI summit in Toronto"></span><span class="tl-dates">Oct 2026</span></div>
-          </li>
-        </ol>
-        <div class="tl-tip" role="status" aria-live="polite"></div>
+          </ol>
+        </div>
+        <div class="ticker-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
       </div>
     </div>
   </section>
